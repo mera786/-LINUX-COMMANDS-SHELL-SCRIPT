@@ -1,0 +1,16 @@
+(1) Why Should a developer or devops engineer learn linux?
+(2) Linux Operating System (OS)?
+(3) Tell name of Linux Distributions?
+(4) How to setup Linux Machine ?
+(5) Explain Linux commands like , mv, grep, wc , touch ,cat , cp, vi and sed ?
+(6) what is User Management and how will you create new user and all user related things do like till delete?
+(7) How will you Enabling Password-Based Authentication in Linux?
+(8) What is group and how will you Managing User Groups in Linux?
+(9) what is File Permissions in Linux and how many types of it?
+(10) What is used for chown command and it's syntax?
+(11) Using which command you will find the file in linux and also tell the syntax?
+(12) How will you create .zip file or compress .zip or .tar file ?
+(13) Can you explain networking commands like ping,wget,curl and ifconfig used for what ?
+(14) what are package managers in linux?
+(15) what are link files in linux and how many types of it?
+(16) Explain Linux Architecture Components?

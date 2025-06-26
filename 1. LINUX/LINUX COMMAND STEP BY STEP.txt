@@ -1,0 +1,241 @@
+
+
+LINUX COMMANDS:=
+---------------------------------------------------------------------------------------------------------------------------------------
+(1) whoami
+(2) pwd
+(3) date
+(4) cal
+(5) cal 2025
+(6) clear
+(7) mkdir a b c
+(8) rmdir c
+(9) rm -rf b
+(10) ls
+(11) ls -r
+(12) ls -l
+(13) ls -lr
+(14) ls -lt
+(15) ls -ltr
+(16) ls -la
+(17) touch f1.txt
+(18) cd ~
+(19) cd ..
+(20) rm f3.txt
+(21) mv <existing-name.txt> <new-name.txt>
+(22) mv f2.txt /home/ec2-user/<new-location>
+(23) cat > f1.txt
+(24) cat >> f1.txt
+(25) cat f1.txt
+(26) cat -n f1.txt
+(27) tac f1.txt
+(28) cp f1.txt f2.txt
+(29) cat f1.txt f2.txt > f3.txt
+(30) head f3.txt
+(31) head -n 4 f3.txt
+(32) tail f3.txt
+(33) tail -n 5 f3.txt
+(34) grep 'h' f3.txt
+(35) grep -i 'h' f3.txt
+(36) grep -n 'h' f3.txt
+(37) grep -i -n 'h' f3.txt
+(38) grep -v 'h' f3.txt
+(39) grep -v -i 'h' f3.txt
+(40) grep -v -i -n 'h' f3.txt
+(41) grep 'h' *
+(42) grep  -i 'h' *
+(43) grep -n 'h' *
+(44) grep -n -i 'h' *
+(45) grep -r 'h' *
+(46) tail -n 5 f3.txt | grep -i 'h' 
+(47) wc f3.txt
+(48) wc -l f3.txt
+(49) wc -w f3.txt
+(50) wc -m f3.txt
+(51) wc -c f3.txt
+(52) vi <file-name>
+        ** i **
+        ** Esc **
+        ** :wq ** 
+        ** :q! **
+        ** :w **
+
+Substituting Text:=
+(53) sed 's/hello/welcome/' f3.txt 
+(54) sed 's/hello/welcome/2' f3.txt 
+(55) sed 's/hello/welcome/g' f3.txt 
+(56) sed  -i 's/hello/welcome/g' f3.txt 
+
+Inserting Text:=
+(57) sed '1i\first line' f3.txt
+(58) sed '2i\ second line ' f3.txt
+(59) sed ' $a\ last line' f3.txt
+
+Printing Specific Line :=
+(60) sed -n '10,20p' f3.txt
+(61) sed -n '10, $p ' f3.txt
+
+Deleting Lines:=
+(62) sed -i '1d' f3.txt
+(63) sed -i '4d' f3.txt
+(64) sed -i '$d' f3.txt
+(65) sed -i '5,10d' f3.txt
+(66) sed -i '5,$d' f3.txt
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+USER MANAGEMENT :=
+(1) sudo useradd <user-name>
+(2) sudo passwd <user-name>
+(3) sudo usermod -l <new-username> <old-username>
+(4) grep <username> /etc/passwd
+(5) cat /etc/passwd
+(6) su <username>
+(7) sudo userdel <username> / sudo userdel --remove <username>
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Enabling Passwd-based Authentication in linux:=
+(1) sudo cat /etc/sudoers
+(2) sudo visudo
+     <username> ALL=(ALL:ALL) ALL
+     press Ctrl +x,then y and hit enter
+(3) sudo vi /etc/ssh/sshd_config
+     passwordAuthentication  No
+     change it to : PasswordAuthentication Yes
+     and use :wq
+(4) sudo systemctl restart sshd
+(5) ssh <username>@public-ip
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+Managing User Groups in Linux:=
+(1) cat /etc/group
+(2) sudo groupadd <group-name>
+(3) sudo groupmod -n <new-group-name> <old-group-name>
+(4) sudo usermod -aG <group-name> <username>
+(5) getent group <group-name>
+(6) sudo lid -g <group-name> 
+(7) sudo gpasswd -d <username> <group-name>
+(8) id <username>
+(9) sudo groupdel <group-name>
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+File Permisssion in linux:=
+(1) chmod u+x f1.txt
+(2) chmod g+r+w f1.txt
+(3) chmod o+rwx f1.txt
+(4) chmod o-rwx f1.txt
+(5) chmod 111 f1.txt
+(6) chmod 222 f1.txt
+(7) chmod 765 f1.txt
+(8) chmod 456 f1.txt
+(9) chmod 777 f1.txt
+(10) chmod 007 f1.txt
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+Chown Command for changing the ownership of files and directories:=
+(1) sudo chown <user-name> f1.txt
+(2) sudo chown :<group-name> f1.txt
+(3) sudo chown <user-name>:<group-name> f1.txt
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Finding Files in linux:=
+(1) sudo find /home -name 'f1.txt'
+(2) sudo find /home -type f -empty
+(3) sudo find /home -type d -empty
+(4) sudo find /home -mtime 1 -print
+(5) sudo find /home -mtime +30 -delete
+
+
+
+ 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Working with Zip file:=
+(1) zip <file-name> * .txt 
+(2) unzip <zip-file-name>
+(3) to download command:  wget <url>
+(4) tar -cvf <new-folder-name.tar> <old-folder-name>  / tar -cvf my_tar.tar a
+(5) gzip <folder-name.tar>  / gzip my_tar.tar
+(6) gunzip <folder-name.tar.gz>  / gunzip my-tar.tar.gz
+(7) tar -xvf <folder-name.tar>  / tar -xvf my_tar.tar
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Networking commands :=
+(1) ping <url> /ping <ip-address>
+(2) ping -c 4 <url>                /      EX- ping -c www.google.com
+(3) wget <url>
+(4) curl <url>  /curl https://fake-json-api.mock.beeceptor.com/companies
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Package Managers in linux:=
+(1) sudo yum install <package-name> -y / sudo yum install git -y
+(2) whereis git
+(3) git --version
+(4)  sudo yum update <package-name>   / sudo yum update maven
+(5) sudo yum remove <package-name>  -y   / sudo yum remove git -y
+(6) sudo yum install <web-server-name> -y / sudo yum install httpd -y
+(7) sudo service <web-server-name> status / sudo service httpd status
+(8) sudo service <web-server-name> start / sudo service httpd start   / sudo systemctl start httpd   / to test LIKE, Http://<public-ip> 
+(9) cd /var/www/html
+(10) sudo vi index.html
+(11) sudo systemctl reload <service-name>  / sudo systemctl reload httpd
+(12) sudo systemctl restart <service-name>  / sudo systemctl restart httpd
+(13) sudo service httpd stop / sudo systemctl stop httpd 
+(14) top
+
+
+REST REVISE BELOW COMMANDS
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Working with link files:=
+(1) ln <original-file> <hard-link-file>  / ln f1.txt f1_hardlink.txt
+(2) ln -s <original-file> <soft-link-file>  / ls -s /home/ec2-user/folder1/a.txt  b.txt
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   General Commands:=
+(1) ps aux
+(2) sleep 1000 &
+(3) ps aux | grep sleep
+(4) kill <PID>  / kill -9 <PID> 
+(5) free -m 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Linux Architecure components:=
+
+glance a notes
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Extra commands:=
+(1) sudo hostname <host-name>
+(2) sudo vi /etc/hostname
+
+------------------------------------------------------------- End --------------------------------------------------------------------------------------------
+ 
+    

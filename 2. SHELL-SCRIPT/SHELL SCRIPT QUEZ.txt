@@ -1,0 +1,16 @@
+(1) WHAT IS SCRIPT ?
+(2) Why Use Scripting?
+(3) What is Shell Scripting?
+(4) Explain Common Use Cases of Shell Scripting?
+(5) What is Sha-Bang in Linux?
+(6) Why Use Sha-Bang?
+(7) Is Sha-Bang Mandatory?
+(8) Tell some Common Shebangs (Sha-Bangs) in the Market?
+(9) Variable Naming Conventions in Shell:
+  (a) Explain General Rules for Naming Variables? , (b) How to Access Variables in shell-script?   (c) How to Declare Read-Only Variables?
+  (d) How to remove / Unsetting a Variable ?      
+(10) Types of Variables in Linux?
+(11) Explain  System Variables (Environment Variables) & User-Defined Variables ?
+(12) Why to use export keyword to create variable in shell script ?
+(13) How to Set Variables Permanently in Linux?
+(14) How to Set Variables for All Users in Linux?
