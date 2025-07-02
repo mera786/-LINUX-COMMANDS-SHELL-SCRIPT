@@ -1,86 +1,583 @@
+NOTE:- 
+**************************** 
+Reading File Data  
+****************************
+cat   : Display file content from top to bottom  
+tac   : Display file content from bottom to top  
+head  : Show the first 10 lines of a file  
+tail  : Show the last 10 lines of a file  
+vi    : Open a file for viewing or editing  
+
+***************************************** NOTE END ******************************************************
 
 
-LINUX COMMANDS:=
----------------------------------------------------------------------------------------------------------------------------------------
-(1) whoami
-(2) pwd
-(3) date
-(4) cal
-(5) cal 2025
-(6) clear
-(7) mkdir a b c
-(8) rmdir c
-(9) rm -rf b
-(10) ls
-(11) ls -r
-(12) ls -l
-(13) ls -lr
-(14) ls -lt
-(15) ls -ltr
-(16) ls -la
-(17) touch f1.txt
-(18) cd ~
-(19) cd ..
-(20) rm f3.txt
-(21) mv <existing-name.txt> <new-name.txt>
-(22) mv f2.txt /home/ec2-user/<new-location>
-(23) cat > f1.txt
-(24) cat >> f1.txt
-(25) cat f1.txt
-(26) cat -n f1.txt
-(27) tac f1.txt
-(28) cp f1.txt f2.txt
-(29) cat f1.txt f2.txt > f3.txt
-(30) head f3.txt
-(31) head -n 4 f3.txt
-(32) tail f3.txt
-(33) tail -n 5 f3.txt
-(34) grep 'h' f3.txt
-(35) grep -i 'h' f3.txt
-(36) grep -n 'h' f3.txt
-(37) grep -i -n 'h' f3.txt
-(38) grep -v 'h' f3.txt
-(39) grep -v -i 'h' f3.txt
-(40) grep -v -i -n 'h' f3.txt
-(41) grep 'h' *
-(42) grep  -i 'h' *
-(43) grep -n 'h' *
-(44) grep -n -i 'h' *
-(45) grep -r 'h' *
-(46) tail -n 5 f3.txt | grep -i 'h' 
-(47) wc f3.txt
-(48) wc -l f3.txt
-(49) wc -w f3.txt
-(50) wc -m f3.txt
-(51) wc -c f3.txt
-(52) vi <file-name>
-        ** i **
-        ** Esc **
-        ** :wq ** 
-        ** :q! **
-        ** :w **
+############################################################################################################
+                      🔹 1. Basic System & Navigation Commands
+##############################################################################################################
+whoami                    # Logged-in username
+pwd                       # Present working directory
+date                      # Current date and time
+cal                       # Calendar (current month)
+cal 2025                  # Calendar of a specific year
+clear                     # Clear the screen
+cd dir-name               # Change to specific directory
+cd ~                      # Change to home directory
+cd ..                     # Move up one level
 
-Substituting Text:=
-(53) sed 's/hello/welcome/' f3.txt 
-(54) sed 's/hello/welcome/2' f3.txt 
-(55) sed 's/hello/welcome/g' f3.txt 
-(56) sed  -i 's/hello/welcome/g' f3.txt 
 
-Inserting Text:=
-(57) sed '1i\first line' f3.txt
-(58) sed '2i\ second line ' f3.txt
-(59) sed ' $a\ last line' f3.txt
+####################################################################################################################  
+                      🔹 2. Directory (Folder) Management 
+####################################################################################################################  
+mkdir s3                        # Create a single directory
+mkdir dev qa                    # Create multiple directories
+mkdir -p dev/project/src        # Create nested directories (parent folders)
 
-Printing Specific Line :=
-(60) sed -n '10,20p' f3.txt
-(61) sed -n '10, $p ' f3.txt
+rmdir qa                        # Remove an empty directory
+rmdir dev qa                    # Remove multiple empty directories
 
-Deleting Lines:=
-(62) sed -i '1d' f3.txt
-(63) sed -i '4d' f3.txt
-(64) sed -i '$d' f3.txt
-(65) sed -i '5,10d' f3.txt
-(66) sed -i '5,$d' f3.txt
+rm -r devops                    # Remove a directory and its contents recursively
+rm -rf devops                   # Forcefully remove a non-empty directory (no prompt)
+
+ls                              # List contents of current directory
+ls -d */                        # List only directories in current location
+
+cd dir-name                     # Change to a specific directory
+cd ..                           # Go up one level
+cd ~                            # Go to the home directory
+
+pwd                             # Show current directory (Print Working Directory)
+
+tree                            # View directory structure as a tree (requires `tree` package)
+
+stat folder-name                # Show detailed info about a directory
+
+du -sh folder-name              # Show total size of a directory
+
+find . -type d                  # Find all directories from current path
+find /path -type d -name "qa"   # Find directories named "qa"
+
+
+##################################################################################################################################
+                                 🔹 3. Listing Files & Directories
+##################################################################################################################################
+
+ls                         # List all files and directories
+ls -l                      # Long listing (detailed view)
+ls -a                      # Show all, including hidden files (starting with .)
+ls -la                     # Long listing + hidden files
+ls -lh                     # Long listing with human-readable file sizes
+ls -lt                     # Sort by modification time (newest first)
+ls -ltr                    # Sort by time, oldest first
+ls -lr                     # List in reverse order
+ls -lS                     # Sort by file size (largest first)
+ls -ltu                    # Sort by last access time
+ls -lU                     # Sort by creation time (if supported)
+ls -R                      # Recursively list all files in directories and subdirectories
+ls -d */                   # List only directories in current path
+ls --group-directories-first  # Show directories before files (supported in some distros)
+ls -1                      # One entry per line (useful for scripting)
+
+
+
+#########################################################################################################################  
+                               📄 4. File Creation & Management Commands 
+######################################################################################################################### 
+
+** touch : Create an empty file  **
+-------------------------------------
+touch t1.txt                    # Create a single empty file
+touch t2.txt t3.txt             # Create multiple empty files
+touch -c t1.txt                 # Do not create file if it doesn't exist (just update timestamp)
+
+mv f2.txt new.txt               # Rename file
+mv file.txt /path/              # Move file to another directory
+mv file.txt dir/new.txt         # Move and rename simultaneously
+
+cp t1.txt t2.txt                # Copy t1.txt to t2.txt (overwrite if exists)
+cp file.txt /path/              # Copy file to another directory
+cp -i t1.txt t2.txt             # Prompt before overwrite
+cp -n t1.txt t2.txt             # Do not overwrite if destination file exists
+cp -r dir1 dir2                 # Copy directory and its contents recursively
+
+rm t1.txt                       # Delete a file
+rm -i t1.txt                    # Prompt before deletion
+rm -f t1.txt                    # Force delete (no prompt)
+rm t2.txt t3.txt                # Delete multiple files
+
+
+
+################################################################################################################################
+                            🔹 5. File Creation, Content Viewing & Editing
+################################################################################################################################
+     cat > t1.txt                   # Create file with input (overwrite if exists)
+cat >> t1.txt                  # Append to existing file
+cat t1.txt                     # View file content
+cat -n t1.txt                  # View file with line numbers
+cat -b t1.txt                  # View with line numbers (excluding blank lines)
+cat -s t1.txt                  # Squeeze multiple blank lines
+cat -E t1.txt                  # Show end of each line using $
+cat -T t1.txt                  # Show tab characters as ^I
+cat -A t1.txt                  # Show all special characters (like tabs, line ends)
+cat t1.txt t2.txt              # Concatenate and display multiple files
+cat t1.txt t2.txt > t3.txt     # Merge contents into a new file
+cat t1.txt >> t2.txt           # Append contents of t1.txt to t2.txt
+
+tac t1.txt                     # View file in reverse line order
+
+head t1.txt                    # Show first 10 lines
+head -n 20 t1.txt              # Show first 20 lines
+tail t1.txt                    # Show last 10 lines
+tail -n 25 t1.txt              # Show last 25 lines
+head -c 50 t1.txt              # Show first 50 bytes of a file
+tail -c 30 t1.txt              # Show last 30 bytes of a file
+
+Note: The `tail` command is commonly used to monitor real-time log updates.
+
+
+#################################################################################################################################
+                                🔹 6. Using vi Editor (Essential Text Editing Tool)
+#################################################################################################################################
+vi t3.txt                 # Open or create file
+# Inside vi:
+   i     -> Insert mode
+   Esc   -> Back to command mode
+   :w    -> Save
+   :wq   -> Save and exit
+   :q!   -> Exit without saving
+
+#####################################################################################################################################
+                                  🔹 7. Text Searching (grep) & Counting (wc)
+#####################################################################################################################################
+grep 'hello' test.txt           # Simple search
+grep -i 'hello' test.txt        # Case-insensitive search
+grep -n 'hello' test.txt        # Show matching lines with line numbers
+grep -v 'hello' test.txt        # Invert match (show lines NOT containing 'hello')
+grep -c 'hello' test.txt        # Count matching lines
+grep -r 'hello' *               # Recursively search in all files/directories
+grep -l 'hello' *               # Show filenames with at least one match
+grep -L 'hello' *               # Show filenames with no match
+grep 'hello' *                  # Search in all files in current directory
+grep -w 'hello' test.txt        # Match whole word only
+grep -x 'hello' test.txt        # Match whole line
+grep -e 'hello' -e 'hi' test.txt  # Search multiple patterns
+grep -A 2 'hello' test.txt      # Show 2 lines After match
+grep -B 2 'hello' test.txt      # Show 2 lines Before match
+grep -C 2 'hello' test.txt      # Show 2 lines Before & After match
+tail test.txt | grep 'hello'    # Combine tail + grep (e.g., last lines filtered)
+
+wc test.txt                     # Show lines, words, and bytes
+wc -l test.txt                  # Count lines only
+wc -w test.txt                  # Count words only
+wc -c test.txt                  # Count bytes
+wc -m test.txt                  # Count characters
+wc -L test.txt                  # Length of longest line
+cat test.txt | wc               # Count output of file (can be piped)
+grep 'hello' test.txt | wc -l   # Count number of matching lines
+
+
+#####################################################################################################################################
+                                                 🔹 8. Stream Editor (sed)
+#####################################################################################################################################
+🔁 Substitute / Replace:
+sed 's/linux/unix/' data.txt            # Replace first occurrence in each line
+sed 's/linux/unix/g' data.txt           # Replace all occurrences in each line
+sed -i 's/linux/unix/g' data.txt        # In-place replace in the original file
+sed 's/linux/& unix/' data.txt          # Add text after match (linux → linux unix)
+sed 's/\(linux\)/\U\1/' data.txt        # Convert match to UPPERCASE
+sed 's/\(linux\)/\L\1/' data.txt        # Convert match to lowercase
+
+➕ Insert / Append:
+sed '1i\First line' data.txt            # Insert before line 1
+sed '2i\Text' data.txt                  # Insert before line 2
+sed '$a\Last line' data.txt             # Append after the last line
+sed '3a\Extra line' data.txt            # Append after line 3
+
+❌ Delete Lines:
+sed -i '1d' data.txt                    # Delete first line
+sed -i '5,15d' data.txt                 # Delete lines 5 to 15
+sed '/^$/d' data.txt                    # Delete all blank lines
+sed '/linux/d' data.txt                 # Delete lines containing "linux"
+
+📌 Print Specific Lines:
+sed -n '10,20p' data.txt                # Print lines 10 to 20
+sed -n '10,$p' data.txt                 # Print from line 10 to end
+sed -n '/linux/p' data.txt              # Print lines matching pattern
+
+🧹 Other Useful sed Operations:
+sed -e 's/old/new/' -e 's/foo/bar/' data.txt   # Run multiple sed commands
+sed '2c\This is line 2 now' data.txt           # Change/replace entire line 2
+sed -n '=' data.txt                            # Print line numbers only
+sed '=' data.txt | sed 'N;s/\n/ /'             # Print lines with their numbers
+
+
+#####################################################################################################################################
+                                                 🔹 9. User Management
+#####################################################################################################################################
+sudo useradd <user>                   # Add a new user
+sudo useradd -m <user>                # Add user with home directory
+sudo useradd -s /bin/bash <user>      # Add user with specified shell
+sudo passwd <user>                    # Set/change user password
+
+sudo usermod -l new old               # Rename a user
+sudo usermod -d /new/home <user>      # Change home directory
+sudo usermod -s /bin/zsh <user>       # Change login shell
+sudo usermod -aG group <user>         # Add user to a supplementary group
+sudo usermod -L <user>                # Lock user account
+sudo usermod -U <user>                # Unlock user account
+
+sudo userdel <user>                   # Delete a user (without home directory)
+sudo userdel --remove <user>          # Delete user and home directory
+
+su <username>                         # Switch to another user
+sudo su - <username>                  # Switch to user with full login shell
+
+cat /etc/passwd                       # View list of all users
+grep <user> /etc/passwd               # View details of a specific user
+
+cd ~                                  # Go to current user's home directory
+cd ~<user>                            # Go to another user's home directory
+
+whoami                                # Show current logged-in username
+id <user>                             # Show UID, GID, and group info for user
+groups <user>                         # Show groups a user belongs to
+
+
+#####################################################################################################################################
+                                               🔹 10. User Group Management
+#####################################################################################################################################
+cat /etc/group                          # View all groups on the system
+getent group <group>                   # View details of a specific group
+
+sudo groupadd <group>                  # Create a new group
+sudo groupdel <group>                  # Delete an existing group
+sudo groupmod -n new old               # Rename a group
+
+sudo usermod -aG <group> <user>        # Add user to a supplementary group
+sudo gpasswd -a <user> <group>         # Add user to a group (alternative method)
+sudo gpasswd -d <user> <group>         # Remove user from a group
+sudo gpasswd <group>                   # Set or change group administrator
+
+sudo lid -g <group>                    # List all users in a group (requires `libuser` package)
+id <username>                          # Show UID, GID, and group info for user
+groups <username>                      # Show groups that a user belongs to
+members <group>                        # List users in a group (requires `members` package)
+
+newgrp <group>                         # Switch to a new group in current shell session
+
+
+
+#####################################################################################################################################
+                                           🔐 11. File Permission Management — chmod
+#####################################################################################################################################
+🧑 Symbolic Mode:
+chmod u+x f1.txt               # Add execute for user
+chmod g+w f1.txt               # Add write for group
+chmod o-x f1.txt               # Remove execute for others
+chmod o-rwx f1.txt             # Remove all permissions for others
+chmod g+rwx f1.txt             # Add all permissions to group
+
+chmod u=r f1.txt               # Set only read for user
+chmod u=rw,g=r,o= f1.txt       # User=rw, Group=r, Others=none
+chmod a+x f1.txt               # Add execute to all (user, group, others)
+chmod a-r f1.txt               # Remove read permission from all
+
+🔢 Octal (Numeric) Mode:
+chmod 777 f1.txt               # Full permissions for everyone
+chmod 755 f1.txt               # rwx for user, rx for group & others
+chmod 700 f1.txt               # rwx for user only
+chmod 644 f1.txt               # rw for user, r for group & others
+chmod 600 f1.txt               # rw for user only
+chmod 007 f1.txt               # Full permission for others only
+chmod 765 f1.txt               # u=rwx, g=rw, o=rx
+chmod 000 f1.txt               # No permissions at all
+
+#####################################################################################################################################
+                                     👑 12. Ownership & Group Management — chown and chgrp
+#####################################################################################################################################
+🧑‍💼 chown — Change File Owner and Group:
+sudo chown user1 f1.txt              # Change owner to user1
+sudo chown :group1 f1.txt            # Change group to group1 (owner unchanged)
+sudo chown user1:group1 f1.txt       # Change both owner and group
+
+sudo chown -R user1 folder/          # Recursively change owner
+sudo chown -R user1:group1 folder/   # Recursively change owner and group
+sudo chown --from=olduser user1 f1.txt   # Change only if current owner is olduser
+
+ls -l f1.txt                         # Check current ownership
+
+👥 chgrp — Change Group Only:
+sudo chgrp group1 f1.txt             # Change group of file
+sudo chgrp -R group1 folder/         # Recursively change group
+
+
+#####################################################################################################################################
+                                         🔎 13. File & Directory Search — find Command
+######################################################################################################################################
+find /home -name "f1.txt"                 # Find file by name
+find /home -iname "F1.TXT"                # Case-insensitive name match
+find /home -type f -empty                 # Find empty files
+find /home -type d -empty                 # Find empty directories
+
+find /home -type f -size +10M             # Files larger than 10MB
+find /home -type f -size -1k              # Files smaller than 1KB
+
+find /home -mtime 1 -print                # Modified exactly 1 day ago
+find /home -mtime +30 -delete             # Delete files older than 30 days
+find /home -atime -7                      # Accessed within last 7 days
+find /home -ctime -1                      # Status changed in last 1 day
+
+find /home -user username                 # Files owned by specific user
+find /home -group groupname               # Files belonging to specific group
+
+find /home -type f -perm 777              # Files with 777 permissions
+find /home -type f ! -perm 644            # Files not having 644 permission
+
+find /home -type f -exec rm {} \;         # Delete all matching files (one-by-one)
+find /home -type f -exec chmod 644 {} \;  # Change permission of found files
+
+find . -maxdepth 1 -name "*.txt"          # Search only current directory
+find . -mindepth 2 -name "*.log"          # Exclude top-level directory
+
+find / -name "*.log" 2>/dev/null          # Suppress permission denied errors
+
+#####################################################################################################################################
+                                        📦 14. Archiving & Compression File Commands
+#####################################################################################################################################
+🔹 ZIP & UNZIP:
+zip my_archive.zip *.txt               # Zip all .txt files
+zip -r my_archive.zip folder/          # Zip a folder recursively
+unzip my_archive.zip                   # Extract a ZIP file
+unzip -l my_archive.zip                # List contents of a ZIP file
+unzip -d extracted/ my_archive.zip     # Extract to specific directory
+
+🔹 TAR (Archive Tool):
+tar -cvf archive.tar folder/           # Create a .tar archive from folder
+tar -xvf archive.tar                   # Extract a .tar archive
+tar -tvf archive.tar                   # List contents of .tar file
+tar -rvf archive.tar newfile.txt       # Add file to existing tar archive
+tar --delete -f archive.tar file.txt   # Delete file from tar (GNU tar only)
+
+tar -czvf archive.tar.gz folder/       # Create tar and compress with gzip
+tar -xzvf archive.tar.gz               # Extract .tar.gz archive
+tar -caf archive.tar.xz folder/        # Create tar compressed with .xz
+tar -xf archive.tar.xz                 # Extract .tar.xz archive
+
+🔹 GZIP / GUNZIP:
+gzip archive.tar                       # Compress using gzip (output: archive.tar.gz)
+gunzip archive.tar.gz                  # Decompress .gz file
+gzip -d archive.tar.gz                 # Same as gunzip
+gzip -k file.txt                       # Compress but keep original file
+gzip -r folder/                        # Compress files in folder recursively
+
+
+#####################################################################################################################################
+                                    🔧 15. Networking & Connectivity Commands for DevOps
+#####################################################################################################################################
+🌐 1. Network Connectivity & Testing:
+ping google.com                      # Basic network test (infinite)
+ping -c 4 google.com                 # Ping with 4 echo requests
+traceroute google.com               # Trace route to host (shows path)
+nslookup google.com                 # DNS resolution info
+dig google.com                      # More detailed DNS lookup (preferred by DevOps)
+host google.com                     # Simple DNS info
+eg-
+## 🌐 Networking & Connectivity Commands for DevOps
+
+ping google.com                      # Basic network test
+ping -c 4 google.com                 # Ping with 4 echo requests
+traceroute google.com               # Trace route to host
+nslookup google.com                 # DNS resolution info
+dig google.com                      # DNS lookup (detailed)
+host google.com                     # Simple DNS info
+
+ifconfig                             # Show IP (legacy)
+ip a                                 # Show IP (modern)
+ip r                                 # Routing table
+ip link                              # Interface status
+
+netstat -tuln                        # Open ports and services
+ss -tuln                             # Faster alternative to netstat
+
+hostname                             # Show hostname
+hostname -I                          # Show IP addresses
+
+curl https://example.com            # HTTP GET request
+curl -I https://example.com         # Show only HTTP headers
+wget https://example.com/file.txt   # Download file
+
+
+📡 2. IP, Interface, and Port Information:
+ifconfig                             # Show IP address (legacy)
+ip a                                 # Show IP address (modern)
+ip r                                 # Show routing table
+ip link                              # Show interface status
+
+netstat -tuln                        # Show open ports and listening services
+ss -tuln                             # Faster and more modern alternative to netstat
+
+hostname                             # Show system hostname
+hostname -I                          # Show IP addresses
+
+🧪 3. Connectivity & Performance Tools:
+curl https://example.com            # Transfer data (GET request)
+curl -I https://example.com         # Fetch only headers
+curl -O https://example.com/file    # Download file with original name
+curl -X POST -d "key=value" <url>   # Send POST request
+
+wget <url>                          # Download files from the web
+wget -c <url>                       # Resume incomplete download
+
+telnet <host> <port>                # Test connection to specific port (e.g., telnet smtp.gmail.com 25)
+nc -zv <host> <port>                # Test port connectivity with netcat
+
+📊 4. System Monitoring:
+top                                  # Live process monitoring
+htop                                 # Improved top (may need install)
+uptime                               # System uptime
+vmstat 1                             # Memory, CPU, I/O stats (every 1s)
+iostat                               # CPU and disk I/O stats (requires sysstat)
+free -h                              # Human-readable memory info
+df -h                                # Disk usage summary
+du -sh *                             # Size of each file/folder in current dir
+
+📋 5. Logs & Services:
+journalctl                           # View systemd logs
+journalctl -xe                       # View recent and error logs
+tail -f /var/log/syslog              # Real-time log monitoring (Debian)
+tail -f /var/log/messages            # (RHEL/CentOS)
+
+systemctl status nginx               # Status of nginx service
+systemctl start|stop|restart nginx  # Start, stop, or restart service
+systemctl enable|disable nginx      # Enable/disable service on boot
+
+🔧 6. Package Management (Debian/Ubuntu):
+sudo apt update                      # Refresh package list
+sudo apt upgrade                     # Upgrade all packages
+sudo apt install <pkg>              # Install a package
+sudo apt remove <pkg>               # Remove a package
+dpkg -l                             # List installed packages
+
+🛡️ 7. Firewall & Security:
+ufw status                           # Check firewall status
+sudo ufw enable                      # Enable UFW firewall
+sudo ufw allow 22/tcp                # Allow SSH port
+sudo ufw allow 80,443/tcp            # Allow HTTP and HTTPS
+sudo ufw deny 21                     # Deny FTP port
+
+
+
+
+#####################################################################################################################################
+                                           🔹 16. Package Management (YUM)
+#####################################################################################################################################
+🔹 A. YUM Package Management (RHEL/CentOS/Amazon Linux):
+sudo yum install <package> -y         # Install package
+sudo yum remove <package> -y          # Remove package
+sudo yum update <package>             # Update package
+sudo yum upgrade                      # Upgrade all packages
+sudo yum check-update                 # List available updates
+sudo yum list installed               # List all installed packages
+sudo yum list available               # List all available packages
+sudo yum info <package>               # Get detailed info about a package
+sudo yum history                      # View yum command history
+sudo yum clean all                    # Clear cache
+sudo yum provides */<binary>          # Find which package provides a binary
+
+🌐 B. Apache (httpd) Management:
+sudo yum install httpd -y            # Install Apache (httpd)
+sudo systemctl enable httpd          # Enable httpd on boot
+sudo systemctl start httpd           # Start Apache
+sudo systemctl stop httpd            # Stop Apache
+sudo systemctl restart httpd         # Restart Apache
+sudo systemctl reload httpd          # Reload config without stopping
+sudo systemctl status httpd          # Show Apache service status
+sudo apachectl configtest            # Test Apache config syntax
+sudo firewall-cmd --add-service=http --permanent   # Allow HTTP through firewall
+sudo firewall-cmd --reload                        # Reload firewall rules
+
+
+
+
+#####################################################################################################################################
+                                      🔗 17. File Linking — Hard & Soft Links in Linux
+#####################################################################################################################################
+🧱 A. Create Links:
+ln f1.txt f1_hardlink.txt            # Create hard link (same inode)
+ln -s f1.txt f1_softlink.txt         # Create soft (symbolic) link (pointer to file)
+
+📋 B. Verify & View Links:
+ls -li                               # Show inode numbers (helpful to verify hard links)
+ls -l                                # Show symbolic links with "->"
+file f1_softlink.txt                 # Confirm symlink type
+stat f1.txt                          # View file metadata including inode
+stat f1_hardlink.txt                 # Should match original file's inode
+readlink f1_softlink.txt             # Show target file of symlink
+readlink -f f1_softlink.txt          # Show absolute path of target file
+
+🔧 C. Soft Link to Directory:
+ln -s /var/log logs_link             # Create symlink to a directory
+
+❌ D. Removing Links:
+rm f1_softlink.txt                   # Remove a symbolic link
+unlink f1_softlink.txt               # Another way to remove a symlink
+rm f1_hardlink.txt                   # Remove hard link (original file still accessible via others)
+
+
+
+
+
+
+
+#####################################################################################################################################
+                                                  ✅ 18. Process & Memory Management
+#####################################################################################################################################
+🔹 A. Process Management:
+ps aux                                # List all running processes
+ps -ef                                # Alternate format to list processes
+ps aux | grep <process>               # Search for specific process
+sleep 1000 &                          # Run process in background
+jobs                                  # List background jobs
+fg %1                                 # Bring job to foreground
+bg %1                                 # Resume job in background
+
+kill <PID>                            # Gracefully terminate process
+kill -9 <PID>                         # Forcefully kill process
+killall <process-name>                # Kill all processes by name
+pkill <pattern>                       # Kill by name or pattern
+
+🔹 B. Monitoring & Memory Usage:
+top                                   # Live view of running processes
+htop                                  # Enhanced version of top (may require install)
+free -m                               # Show memory in MB
+free -h                               # Show human-readable memory info
+vmstat 1                              # Show memory, CPU, IO stats (every 1 sec)
+uptime                                # Show system uptime and load average
+watch -n 1 free -m                    # Live memory monitoring
+
+🔹 C. CPU & Disk Stats:
+iostat                                # Show CPU & I/O usage (requires `sysstat`)
+sar -u 1 3                            # CPU usage every second for 3 intervals
+pidstat                               # Show CPU usage per process
+
+
+#####################################################################################################################################
+                                      ✅ 19. System Configuration & Hostname Management
+#####################################################################################################################################
+
+hostname                                # Display current hostname
+hostname -f                             # Display FQDN (Fully Qualified Domain Name)
+hostnamectl                             # Show full hostname details
+sudo hostname dev-env-1                 # Temporarily change hostname (until reboot)
+sudo vi /etc/hostname                   # Change hostname permanently (edit manually)
+sudo hostnamectl set-hostname dev-env-1  # Permanently set hostname (recommended)
+
+sudo vi /etc/hosts                      # Map hostname to IP if needed
+sudo reboot                             # Restart the system
+sudo shutdown -r now                    # Restart immediately
+sudo shutdown now                       # Shut down immediately
+sudo poweroff                           # Power off the machine
+
+
 
 
 
