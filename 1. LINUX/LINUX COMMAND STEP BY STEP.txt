@@ -35,7 +35,6 @@ mkdir -p dev/project/src        # Create nested directories (parent folders)
 rmdir qa                        # Remove an empty directory
 rmdir dev qa                    # Remove multiple empty directories
 
-rm -r devops                    # Remove a directory and its contents recursively
 rm -rf devops                   # Forcefully remove a non-empty directory (no prompt)
 
 ls                              # List contents of current directory
@@ -47,14 +46,10 @@ cd ~                            # Go to the home directory
 
 pwd                             # Show current directory (Print Working Directory)
 
-tree                            # View directory structure as a tree (requires `tree` package)
-
 stat folder-name                # Show detailed info about a directory
 
-du -sh folder-name              # Show total size of a directory
-
 find . -type d                  # Find all directories from current path
-find /path -type d -name "qa"   # Find directories named "qa"
+find /path -type d -name "qa"   # Find directories named "qa" (use pwd command to get path )
 
 
 ##################################################################################################################################
@@ -65,7 +60,6 @@ ls                         # List all files and directories
 ls -l                      # Long listing (detailed view)
 ls -a                      # Show all, including hidden files (starting with .)
 ls -la                     # Long listing + hidden files
-ls -lh                     # Long listing with human-readable file sizes
 ls -lt                     # Sort by modification time (newest first)
 ls -ltr                    # Sort by time, oldest first
 ls -lr                     # List in reverse order
@@ -74,7 +68,6 @@ ls -ltu                    # Sort by last access time
 ls -lU                     # Sort by creation time (if supported)
 ls -R                      # Recursively list all files in directories and subdirectories
 ls -d */                   # List only directories in current path
-ls --group-directories-first  # Show directories before files (supported in some distros)
 ls -1                      # One entry per line (useful for scripting)
 
 
